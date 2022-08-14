@@ -1,0 +1,15 @@
+---
+# This playbook will install packages specified in the vars sys_packages array
+
+- name: Update apt
+  become: yes
+  apt:
+    update_cache: yes
+  tags: install-packages
+
+- name: Install required system packages
+  become: yes
+  apt:
+    name: "{{ sys_packages }}"
+    state: latest
+  tags: install-packages
