@@ -1,0 +1,23 @@
+---
+# This playbook will create the admin user
+
+- name: Create a new user with sudo privileges
+  become: yes
+  user:
+    name: "{{ admin_user }}"
+    password: "{{ admin_password | password_hash('sha512') }}"
+    state: present
+    groups: "{{ admin_group }}"
+    append: true
+    create_home: true
+    shell: /bin/bash
+  tags: create-user
+
+- name: Disable password authentication for root
+  become: yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin prohibit-password'
+  tags: disable-root-auth

@@ -1,0 +1,19 @@
+---
+# This playbook will create the administrators group
+
+- name: Check group
+  become: yes
+  group:
+    name: "{{ admin_group }}"
+    state: present
+  tags: group
+
+- name: Allow group to have passwordless sudo
+  become: yes
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: "{{ admin_group_regex }}"
+    line: "{{ admin_group_line }}"
+    validate: '/usr/sbin/visudo -cf %s'
+  tags: passwordless

@@ -1,0 +1,25 @@
+---
+# This playbook will create a symbolic link between sites-available and sites-enabled
+
+- name: Get a list of all sites
+  find:
+    paths: /etc/nginx/sites-available
+    patterns: "*.com"
+    file_type: file
+  register: find
+  tags: enable-sites
+
+- name: Debug Result - List of all sites
+  debug:
+    var: find.files
+  tags: debug-find
+
+- name: Apply symlinks in sites-enabled
+  become: yes
+  file:
+    dest: "/etc/nginx/sites-enabled/{{ item.path | basename }}"
+    src: "{{ item.path }}"
+    state: link
+    force: yes
+  with_items: "{{ find.files }}"
+  tags: enable-sites

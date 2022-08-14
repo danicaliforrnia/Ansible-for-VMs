@@ -1,0 +1,8 @@
+box: bento/ubuntu-20.04
+vm_name:
+host_name:
+memory: 2048
+cpu: 2
+host_path: ../ansible-playbooks
+guest_path: /opt
+private_ip: # VB Host Only Adapter Network
