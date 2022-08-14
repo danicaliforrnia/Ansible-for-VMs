@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'yaml'
+settings = YAML.load_file './settings.yml'
+
+Vagrant.configure("2") do |config|
+  # Box
+  config.vm.box = settings['box']
+  config.vm.hostname = settings['host_name']
+
+  # Guest Additions
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+
+  # Provider
+  config.vm.provider "virtualbox" do |vb|
+  vb.name = settings['vm_name']
+    vb.memory = settings['memory']
+    vb.cpus = settings['cpu']
+  end
+
+  # Network Settings
+   config.vm.network "private_network", ip: settings['private_ip']
+  
+   config.vm.provision "shell", path: "sh/bootstrap.sh"
+  
+end
