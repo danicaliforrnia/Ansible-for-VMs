@@ -13,4 +13,4 @@ sudo apt install -y ansible
 sudo apt install -y sshpass
 echo "Editing Ansible Inventory..."
 sudo sh -c "echo '[servers]' > /etc/ansible/hosts"
-sudo sh -c "echo 'node-host ansible_host=192.168.59.3 ansible_ssh_user=ansible-host ansible_ssh_common_args='-o StrictHostKeyChecking=no'' >> /etc/ansible/hosts"
+sudo sh -c "echo node-host ansible_host=192.168.59.3 ansible_ssh_user=ansible-host ansible_ssh_common_args=\'-o StrictHostKeyChecking=no\' >> /etc/ansible/hosts"
