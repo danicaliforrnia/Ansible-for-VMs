@@ -1,0 +1,6 @@
+---
+- include: install_packages.yml
+- include: install_nginx.yml
+- include: update_firewall.yml
+- include: configure_sites.yml
+- include: enable_sites.yml

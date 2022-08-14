@@ -1,0 +1,29 @@
+---
+# This playbook will allow ssh connections and denied the rest
+
+- name: Allow SSH connections
+  become: yes
+  ufw:
+    rule: allow
+    name: OpenSSH
+  tags: firewall
+
+- name: Deny all other incoming traffic by default
+  become: yes
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+  tags: firewall
+
+- name: UFW Status
+  become: yes
+  shell: ufw status
+  register: ufw_status
+  tags: firewall
+
+- name: Debug Result
+  become: yes
+  debug:
+    var: ufw_status.stdout_lines
+  tags: firewall

@@ -1,0 +1,31 @@
+---
+# This playbook will install packages specified in the vars sys_packages array
+
+- name: Update apt
+  become: yes
+  apt:
+    update_cache: yes
+  tags: install-packages
+
+- name: Add NodeJs apt Key
+  become: yes
+  apt_key:
+    url: "{{ node_apt_key }}"
+    state: present
+  tags: install-packages
+
+- name: Add NodeJs 14.x PPA
+  become: yes
+  apt_repository:
+    repo: "deb {{ node_url }} {{ node_dist }} main"
+    update_cache: yes
+    state: present
+  tags: install-packages
+
+- name: Install required system packages
+  become: yes
+  apt:
+    name: "{{ sys_packages }}"
+    state: present
+    update_cache: yes
+  tags: install-packages

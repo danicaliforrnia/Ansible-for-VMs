@@ -1,0 +1,19 @@
+---
+# This playbook will update firewall to allow outbound and inbound requests through NGINX
+
+- name: UFW Connection - Allow NGINX connections
+  become: yes
+  ufw:
+    rule: allow
+    name: 'Nginx HTTP'
+  tags: web-firewall
+
+- name: UFW Status - NGINX connections
+  become: yes
+  shell: ufw status
+  register: ufw_status
+
+- name: Debug Result - NGINX connections
+  become: yes
+  debug:
+    var: ufw_status.stdout_lines

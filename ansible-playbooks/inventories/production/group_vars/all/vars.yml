@@ -1,0 +1,4 @@
+env: prod
+admin_user: ansible-admin
+admin_password: "{{ vault_admin_password }}"
+admin_group: administrators
