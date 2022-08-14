@@ -23,7 +23,6 @@ Vagrant.configure("2") do |config|
 
   # Network Settings
    config.vm.network "private_network", ip: settings['private_ip']
-  
+
    config.vm.provision "shell", path: "sh/bootstrap.sh"
-  
 end
