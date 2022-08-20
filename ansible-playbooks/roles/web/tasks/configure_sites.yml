@@ -14,7 +14,7 @@
 - name: Copy HTML content
   become: yes
   template:
-    src: index.html
+    src: index.html.j2
     dest: "/var/www/{{ my_app_domain }}/html/index.html"
   tags: www-site
 

@@ -6,6 +6,7 @@
   ufw:
     rule: allow
     name: OpenSSH
+  notify: restart sshd
   tags: firewall
 
 - name: Deny all other incoming traffic by default
@@ -14,7 +15,7 @@
     state: enabled
     policy: deny
     direction: incoming
-  tags: firewall
+  notify: restart sshd
 
 - name: UFW Status
   become: yes
@@ -26,4 +27,3 @@
   become: yes
   debug:
     var: ufw_status.stdout_lines
-  tags: firewall

@@ -1,0 +1,5 @@
+---
+- name: Secure Servers
+  hosts: all
+  roles:
+    - security

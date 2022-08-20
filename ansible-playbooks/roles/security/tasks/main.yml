@@ -1,0 +1,13 @@
+---
+- name: Update Firewall Rules Through UFW
+  include: update_firewall.yml
+  tags: firewall
+- name: Create Admin Group
+  include: create_group.yml
+  tags: group
+- name: Create Admin User
+  include: create_user.yml
+  tags: user
+- name: Secure Access to Server
+  import_tasks: secure_access.yml
+  tags: secure-access

@@ -11,13 +11,4 @@
     append: true
     create_home: true
     shell: /bin/bash
-  tags: create-user
-
-- name: Disable password authentication for root
-  become: yes
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    state: present
-    regexp: '^#?PermitRootLogin'
-    line: 'PermitRootLogin prohibit-password'
-  tags: disable-root-auth
+  tags: create

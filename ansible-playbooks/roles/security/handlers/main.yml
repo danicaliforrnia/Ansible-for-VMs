@@ -1,0 +1,6 @@
+---
+# This handler will restart ssh service
+- name: restart sshd
+  service:
+    name: ssh
+    state: restarted

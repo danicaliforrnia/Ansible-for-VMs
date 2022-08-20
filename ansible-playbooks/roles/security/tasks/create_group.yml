@@ -6,7 +6,6 @@
   group:
     name: "{{ admin_group }}"
     state: present
-  tags: group
 
 - name: Allow group to have passwordless sudo
   become: yes

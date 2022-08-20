@@ -12,4 +12,3 @@
   apt:
     name: "{{ sys_packages }}"
     state: latest
-  tags: install-packages

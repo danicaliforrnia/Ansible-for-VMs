@@ -1,0 +1,3 @@
+admin_group_regex: ^%administrators
+admin_group_line: '%administrators ALL=(ALL) NOPASSWD: ALL'
+copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/web_id_rsa.pub') }}"
