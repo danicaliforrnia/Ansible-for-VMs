@@ -3,4 +3,4 @@
 #
 echo "--------------------------------------------------------------------------------------"
 echo "Generating SSH Key Pair..."
-sudo ssh-keygen -f ~/.ssh/web_id_rsa -t ecdsa -b 521
+ssh-keygen -f ~/.ssh/web_id_rsa -t ecdsa -b 521 -q -N "" || echo "FAILED"
