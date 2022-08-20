@@ -7,7 +7,7 @@
     user: "{{ admin_user }}"
     key: "{{ copy_local_key }}"
   register: add_identity_key
-  when: ssh_identity_key is defined and admin_user is defined
+  when: ssh_identity_key_path is defined and admin_user is defined
 
 - name: Disable empty password login
   become: yes
