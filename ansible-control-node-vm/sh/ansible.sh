@@ -10,7 +10,9 @@ sudo apt upgrade
 sudo apt -y install software-properties-common
 sudo apt install software-properties-common
 sudo apt install -y ansible
-sudo apt install -y sshpass
-echo "Editing Ansible Inventory..."
-sudo sh -c "echo '[servers]' > /etc/ansible/hosts"
-sudo sh -c "echo node-host ansible_host=192.168.59.3 ansible_ssh_user=vagrant ansible_ssh_common_args=\'-o StrictHostKeyChecking=no\' >> /etc/ansible/hosts"
+echo "Creating vault password file..."
+sh -c "echo '$1' > $HOME/.vault_pass"
+echo "Editing ansible.cfg..."
+sudo sed -i '/vault_password_file$/a vault_password_file = $HOME/.vault_pass' /etc/ansible/ansible.cfg
+
+

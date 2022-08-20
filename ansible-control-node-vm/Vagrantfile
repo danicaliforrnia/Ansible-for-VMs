@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   # Provider
   config.vm.provider "virtualbox" do |vb|
-  vb.name = settings['vm_name']
+    vb.name = settings['vm_name']
     vb.memory = settings['memory']
     vb.cpus = settings['cpu']
   end
@@ -28,5 +28,5 @@ Vagrant.configure("2") do |config|
    config.vm.network "private_network", ip: settings['private_ip']
 
   # Provisioning
-  config.vm.provision "shell", path: "sh/bootstrap.sh"
+   config.vm.provision "shell", path: "sh/bootstrap.sh", :args => [settings['ansible_vault_password']]
 end

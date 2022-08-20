@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# curl
+#
 echo "--------------------------------------------------------------------------------------"
-echo "Installing curl..."
-sudo apt update
-sudo apt install -y curl
+echo "Generating SSH Key Pair..."
+sudo ssh-keygen -f ~/.ssh/web_id_rsa -t ecdsa -b 521
