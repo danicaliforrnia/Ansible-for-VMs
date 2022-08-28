@@ -34,3 +34,4 @@ build/
 
 *-local.properties
 
+/ansible-playbooks/inventories/local/*
