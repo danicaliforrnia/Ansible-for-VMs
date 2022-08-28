@@ -1,6 +1,16 @@
 ---
-- include: install_packages.yml
-- include: install_nginx.yml
-- include: update_firewall.yml
-- include: configure_sites.yml
-- include: enable_sites.yml
+- name: Install Required Packages
+  include: install_packages.yml
+  tags: install-packages
+- name: Install NGINX Server
+  include: install_nginx.yml
+  tags: nginx
+- name: Update Firewall Rules Through UFW
+  include: update_firewall.yml
+  tags: firewall
+- name: Copy Template Site File to NGINX Sites Available
+  include: configure_sites.yml
+  tags: copy-sites
+- name: Enable NGINX Sites
+  include: enable_sites.yml
+  tags: enable-sites

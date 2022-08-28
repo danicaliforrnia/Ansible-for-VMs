@@ -1,0 +1,51 @@
+---
+# This playbook will secure access by applying some rules
+
+- name: Create key pair
+  local_action:
+    module: openssh_keypair
+    path: "{{ ansible_ssh_private_key_file }}"
+    type: ecdsa
+    size: 521
+    state: present
+    force: no
+  tags: ssh-generate
+
+- name: Add identity key to authorized keys on host
+  become: yes
+  authorized_key:
+    user: "{{ admin_user }}"
+    key: "{{ copy_local_key }}"
+  register: add_identity_key
+  when: ssh_public_key_file is defined and admin_user is defined
+
+- name: Disable empty password login
+  become: yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitEmptyPasswords'
+    line: 'PermitEmptyPasswords no'
+    state: present
+  notify: restart sshd
+  tags: disable-empty-pass
+
+- name: Disable remote root login
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify: restart sshd
+  tags: disable-remote-root-login
+
+- name: Disable password login
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^(#\s*)?PasswordAuthentication '
+    line: 'PasswordAuthentication no'
+  when:
+    - add_identity_key is succeeded
+    - not add_identity_key is skipped
+  notify: restart sshd
+  tags: disable-pass-login

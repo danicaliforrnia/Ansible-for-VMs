@@ -1,9 +1,4 @@
 ---
-- name: Install Required Packages Tasks
+- name: Install Required Packages
   include: install_packages.yml
-- name: Update Firewall Tasks
-  include: update_firewall.yml
-- name: Create Admin Group Tasks
-  include: create_group.yml
-- name: Create Admin User Tasks
-  include: create_user.yml
+  tags: install-packages

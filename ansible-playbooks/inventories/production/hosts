@@ -1,2 +1,0 @@
-[webservers]
-prod-web ansible_host= ansible_ssh_user=

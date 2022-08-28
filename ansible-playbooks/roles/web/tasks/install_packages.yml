@@ -7,7 +7,7 @@
     update_cache: yes
   tags: install-packages
 
-- name: Add NodeJs apt Key
+- name: Add NodeJs apt key
   become: yes
   apt_key:
     url: "{{ node_apt_key }}"
@@ -22,7 +22,7 @@
     state: present
   tags: install-packages
 
-- name: Install required system packages
+- name: Install packages
   become: yes
   apt:
     name: "{{ sys_packages }}"

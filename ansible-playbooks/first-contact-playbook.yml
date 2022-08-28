@@ -1,0 +1,19 @@
+---
+- name: First Contact - Known Hosts
+  gather_facts: no
+  hosts: all
+  tasks:
+    - name: Check if host key exists
+      local_action:
+        module: command
+        args: ssh-keygen -l -F "{{ ansible_host }}"
+      ignore_errors: yes
+      changed_when: no
+      register: host_registered
+
+    - name: Trust the new host
+      local_action:
+        module: shell
+        args: ssh-keyscan -H "{{ ansible_host }}" >> $HOME/.ssh/known_hosts
+      when:
+        - host_registered.rc > 0

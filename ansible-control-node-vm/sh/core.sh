@@ -2,6 +2,8 @@
 
 # curl
 echo "--------------------------------------------------------------------------------------"
-echo "Installing curl..."
+echo "Installing Packages..."
 sudo apt update
-apt install -y curl
+sudo apt install -y curl
+sudo apt install -y sshpass
+echo "Packages Installed"
