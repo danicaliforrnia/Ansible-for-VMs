@@ -28,5 +28,5 @@ Vagrant.configure("2") do |config|
    config.vm.network "private_network", ip: settings['private_ip']
 
   # Provisioning
-   config.vm.provision "shell", path: "sh/bootstrap.sh", :args => [settings['ansible_vault_password']]
+   config.vm.provision "shell", path: "sh/bootstrap.sh", privileged: false, :args => [settings['ansible_vault_password']]
 end
