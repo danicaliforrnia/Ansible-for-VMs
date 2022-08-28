@@ -1,0 +1,24 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  root /var/www/{{ my_app_domain }}/html;
+  index index.html index.htm index.nginx-debian.html;
+
+  server_name {{ my_app_domain }} www.{{ my_app_domain }};
+
+  access_log  /var/log/nginx/{{ my_app_name }}-access.log;
+  error_log  /var/log/nginx/{{ my_app_name }}-error.log;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+
+  location ~ \.css$ {
+    default_type text/css;
+  }
+
+  location ~ \.js$ {
+    default_type text/javascript;
+  }
+}

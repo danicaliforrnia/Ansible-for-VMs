@@ -1,0 +1,4 @@
+---
+- name: Install Required Packages
+  include: install_packages.yml
+  tags: install-packages

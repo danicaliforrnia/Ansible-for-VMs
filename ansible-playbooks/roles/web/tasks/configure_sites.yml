@@ -1,0 +1,30 @@
+---
+# This playbook will create site available for GRE application
+
+- name: Create www directory
+  become: yes
+  file:
+    path: "/var/www/{{ my_app_domain }}/html"
+    state: directory
+    mode: '0775'
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+  tags: www-site
+
+- name: Copy HTML content
+  become: yes
+  template:
+    src: index.html.j2
+    dest: "/var/www/{{ my_app_domain }}/html/index.html"
+  tags: www-site
+
+- name: Copy site file
+  become: yes
+  template:
+    src: my-app.com.j2
+    dest: "/etc/nginx/sites-available/{{ my_app_domain }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: '0644'
+  notify: restart nginx
+  tags: www-site
